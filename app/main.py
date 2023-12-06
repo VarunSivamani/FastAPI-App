@@ -90,7 +90,7 @@ async def create_posts(post: Post, db: Session = Depends(get_db)):
     # new_post = cursor.fetchone()
     # conn.commit()
 
-    new_post = models.Post(title=post.title, content=post.content, published=post.published)
+    new_post = models.Post(**post.dict())
     db.add(new_post)
     db.commit()
     db.refresh(new_post)

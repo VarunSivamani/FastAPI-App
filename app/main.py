@@ -62,11 +62,6 @@ def find_index_post(id):
 async def root():
     return {"message":"hi"}
 
-@app.get("/sqlalchemy")
-def test_posts(db: Session = Depends(get_db)):
-    post = db.query(models.Post).all()
-    return {"data": post}
-
 
 @app.get("/posts")
 async def get_posts(db: Session = Depends(get_db)):

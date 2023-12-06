@@ -70,13 +70,16 @@ async def root():
 
 @app.get("/sqlalchemy")
 def test_posts(db: Session = Depends(get_db)):
-    return {"status": "Success"}
+    post = db.query(models.Post).all()
+    return {"data": post}
 
 
 @app.get("/posts")
-async def get_posts():
-    cursor.execute(""" SELECT * FROM posts """)
-    posts = cursor.fetchall()
+async def get_posts(db: Session = Depends(get_db)):
+    # cursor.execute(""" SELECT * FROM posts """)
+    # posts = cursor.fetchall()
+    
+    posts = db.query(models.Post).all()
     return {"data": posts}
 
 
